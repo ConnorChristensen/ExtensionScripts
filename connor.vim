@@ -1,8 +1,10 @@
 " local syntax file - set colors on a per-machine basis:
 " vim: tw=0 ts=4 sw=4
 " Vim color file
-" Maintainer:	Ron Aaron <ron@ronware.org>
-" Last Change:	2013 May 24
+" Maintainer:	Connor Christensen <chriconn@oregonstate.edu>
+" Last Change:	January 25, 2016
+" Directions: Place this file in /usr/share/vim/vim__/colors
+"		(Note: the vim__ is in my case vim74. There may be a different number at the end)
 
 set background=dark
 hi clear
