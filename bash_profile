@@ -1,0 +1,11 @@
+export PS1="\W > "
+alias ll="ls -FGlAhp"
+alias mkdir="mkdir -pv"
+alias c="clear"
+alias f="open -a Finder ./"
+alias ..="cd ../"
+alias .2="cd ../.."
+alias .3="cd ../../../"
+alias gs="git status"
+alias graph="git log --graph --decorate --oneline"
+
