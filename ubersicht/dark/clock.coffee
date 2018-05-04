@@ -1,20 +1,15 @@
 stylingOptions =
     # background color
-    background: 'rgba(#ffffff, 0.1)' 
-    # show fullscreen -> true
-    fullscreen: false
+    background: 'rgba(#ffffff, 0.1)'
 
 dateOptions =
-    # display not only 'time' also 'date'
-    showDate: false
     # format of 'date'
     date: '%d/%m/%Y %a'
+    # format of 'weekDay'
+    weekDay: '%a'
 
 format = (->
-    if dateOptions.showDate
-        dateOptions.date + '\n' +'%l:%M'
-    else
-        '%l:%M'
+    '%a %l:%M'
 )()
 
 command: "date +\"#{format}\""
@@ -31,29 +26,17 @@ render: (output) -> """
 
 update: (output) ->
     html = output
-
     $(simpleClock).html(html)
 
 style: (->
-    width = 'auto'
-    transform = 'auto'
-
-    if stylingOptions.fullscreen
-        fontSize = '10em'
-        width = '94%'
-
     return """
     color: #ffffff
     font-family: Helvetica Neue
-    right: 2%
-    top: 2%
-    transform: #{transform}
-    width: #{width}
-
+    top: 5px
+    width: 100%
     #simpleClock
-        font-size: 3em
+        font-size: 2.4em
         font-weight: 100
-        margin: 0
         text-align: center
     """
 )()

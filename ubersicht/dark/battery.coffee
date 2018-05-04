@@ -17,10 +17,7 @@ render: -> """
       </clipPath>
     </defs>
     <rect id="hull" x="1" y="1" rx="3" ry="3" width="104" height="26" />
-    <circle id="tip" cx="104" cy="14" r="6"
-      clip-path="url(#cut-off-left)" />
     <rect id="charge" x="3" y="3" rx="2" ry="2" height="22" />
-    <text id="text" x="8" y="18" style="font-size:12">##%</text>
     <path id="bolt" d="M3 0l-3 5h2v3l3-5h-2v-3z" transform="translate(50,6), scale(2)" />
   </svg>
 """
@@ -53,11 +50,11 @@ update: (output, domEl) ->
 style: """
     main = rgba(#fff,1)
     color: main
-    scale = .4
+    scale = .45
     opacity = .7
 
-    top: 80px
-    right: 20px
+    top: 7px
+    left: 5px
     font-family: Helvetica Neue
     font-size: 1em * scale
 
