@@ -1,3 +1,7 @@
+/*
+     A few helpful functions for making C++ programming a little easier
+*/
+
 #ifndef CONNOR_H
 #define CONNOR_H
 
