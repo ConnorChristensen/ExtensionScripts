@@ -5,6 +5,8 @@
 1. In that folder, make two new ones
   * **light**
   * **dark**
+1. Add this line to your bash environment file `(cat ~/.cache/wal/sequences | tr -d "\n" &)`
+	* (You can find that line in the **bash_profile** on the main directory of this repo)
 1. Create a folder called **scripts** in `/usr/local/bin`
 1. Copy everything except this readme into `/usr/local/bin/scripts`
 1. Open a terminal window and type the following commands in one by one
