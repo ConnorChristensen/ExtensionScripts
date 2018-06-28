@@ -1,7 +1,3 @@
-# ExtensionScripts
-
-Some scripts, icons and other software stuff created to extend the functionality of the operating system and alter the looks.
-
 ## Demo
 
 A demo of some of the code in action
