@@ -1,6 +1,8 @@
 ## About
 New circular app icons for some Mac applications
 
+![](icons.png)
+
 ## Contribution
 Contribution is welcome
 
