@@ -1,3 +1,6 @@
+# Demo
+![](hammerspoon-demo.gif)
+
 # Installation
 1. Install [hammerspoon](https://github.com/Hammerspoon/hammerspoon/releases/tag/0.9.66)
 1. Open hammerspoon
