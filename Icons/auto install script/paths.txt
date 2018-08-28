@@ -1,0 +1,1 @@
+photoshop=/Applications/Adobe Photoshop CC*/*.app/Contents/Resources/PS_AppIcon.icns

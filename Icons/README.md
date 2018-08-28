@@ -41,3 +41,19 @@ When you have an app you want to replace with the original one:
 2. Right click on the application
 3. Press *more info* on the dropdown menu
 4. Drag your new icon into the current icon in the top left corner of the info box that popped up
+
+## Future Development
+
+I'm working on a program that will make installing custom apps much easier.
+I wrote a ruby script that will overwrite an arbitrary number of original icons with new ones. 
+I was working on getting the script to turn into an application using [Platypus](https://github.com/sveinbjornt/Platypus)
+You can check out the script in the **auto install script** folder.
+
+There are a few problems with it:
+
+* The user needs to install the ruby sudo package
+* The app seems to be behaving weird with sudo permissions
+* The script runs on the command line, but even when it does, the application will not refresh the new icon unless the application is touched with super user privileges
+	* (eg **sudo touch [appname].app**)
+
+Maybe it's best this get written as a native Mac app, but I'm not sure if it could do exactly what I want it to.
