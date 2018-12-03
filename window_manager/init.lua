@@ -1,3 +1,11 @@
+function getContext()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+    return win, f, screen, max
+end
+
 function nextScreen()
     local win = hs.window.focusedWindow()
     local f = win:frame()
@@ -22,13 +30,9 @@ function previousScreen()
     win:setFrame(f)
 end
 
-
 --left half
 hs.hotkey.bind({"cmd"}, "1", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     if f.x == max.x and f.y == max.y and f.h == (max.h - 5) and f.w == (max.w / 2) then
         screen = win:screen():next()
@@ -43,10 +47,7 @@ end)
 
 --right half
 hs.hotkey.bind({"cmd"}, "2", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x + (max.w / 2)
     f.y = max.y
@@ -59,10 +60,7 @@ end)
 
 --full screen
 hs.hotkey.bind({"cmd"}, "3", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x
     f.y = max.y
@@ -74,10 +72,7 @@ end)
 
 --left third
 hs.hotkey.bind({"cmd", "alt"}, "1", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
     f.x = max.x
     f.y = max.y
     f.h = max.h
@@ -88,10 +83,7 @@ end)
 
 --middle third
 hs.hotkey.bind({"cmd", "alt"}, "2", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
     f.x = max.x + (max.w / 3)
     f.y = max.y
     f.h = max.h
@@ -102,10 +94,7 @@ end)
 
 --right third
 hs.hotkey.bind({"cmd", "alt"}, "3", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
     f.x = max.x + ((max.w / 3) * 2)
     f.y = max.y
     f.h = max.h
@@ -117,10 +106,7 @@ end)
 
 --top left
 hs.hotkey.bind({"cmd", "alt"}, "Q", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x
     f.y = max.y
@@ -133,10 +119,7 @@ end)
 
 --bottom left
 hs.hotkey.bind({"cmd", "alt"}, "A", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x
     f.y = max.y + (max.h / 2)
@@ -148,10 +131,7 @@ end)
 
 --top right
 hs.hotkey.bind({"cmd", "alt"}, "W", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x + (max.w / 2)
     f.y = max.y
@@ -164,10 +144,7 @@ end)
 
 --bottom right
 hs.hotkey.bind({"cmd", "alt"}, "S", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x + (max.w / 2)
     f.y = max.y + (max.h / 2)
@@ -179,10 +156,7 @@ end)
 
 --bottom
 hs.hotkey.bind({"cmd", "alt"}, "B", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x
     f.y = max.y + (max.h / 2)
@@ -194,10 +168,7 @@ end)
 
 --top
 hs.hotkey.bind({"cmd", "alt"}, "T", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+    local win, f, screen, max = getContext()
 
     f.x = max.x
     f.y = max.y
