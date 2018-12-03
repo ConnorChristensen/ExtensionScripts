@@ -34,9 +34,11 @@ end
 hs.hotkey.bind({"cmd"}, "1", function()
     local win, f, screen, max = getContext()
 
-    if f.x == max.x and f.y == max.y and f.h == (max.h - 5) and f.w == (max.w / 2) then
-        screen = win:screen():next()
+    if f.x == max.x and f.y == max.y and f.h == max.h and f.w == (max.w / 2) then
+        nextScreen()
+        win, f, screen, max = getContext()
     end
+
     f.x = max.x
     f.y = max.y
     f.h = max.h
@@ -48,6 +50,11 @@ end)
 --right half
 hs.hotkey.bind({"cmd"}, "2", function()
     local win, f, screen, max = getContext()
+
+    if f.x == max.x + (max.w / 2) and f.y == max.y and f.h == max.h and f.w == max.w / 2 then
+        nextScreen()
+        win, f, screen, max = getContext()
+    end
 
     f.x = max.x + (max.w / 2)
     f.y = max.y
@@ -62,12 +69,17 @@ end)
 hs.hotkey.bind({"cmd"}, "3", function()
     local win, f, screen, max = getContext()
 
+    if f.x == max.x and f.y == max.y and f.h == max.h and f.w == max.w then
+        nextScreen()
+        win, f, screen, max = getContext()
+    end
+
     f.x = max.x
     f.y = max.y
     f.h = max.h
     f.w = max.w
-
     win:setFrame(f)
+
 end)
 
 --left third
