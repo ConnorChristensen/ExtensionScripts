@@ -14,8 +14,18 @@ if [ $# == 1 ]; then
    elif [ $1 == "--light" ] || [ $1 == "-l" ]; then
       # get our image folder
       folder=~/Pictures/background/light/*
+      osascript -e 'tell application "System Events"
+        tell appearance preferences
+        set dark mode to false
+        end tell
+        end tell'
    elif [ $1 == "--dark" ] || [ $1 == "-d" ]; then
       folder=~/Pictures/background/dark/*
+      osascript -e 'tell application "System Events"
+        tell appearance preferences
+        set dark mode to true
+        end tell
+        end tell'
    fi
 fi
 
