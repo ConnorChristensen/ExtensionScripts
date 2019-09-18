@@ -227,6 +227,15 @@ hs.hotkey.bind({"cmd"}, "9", function()
     previousScreen()
 end)
 
+-- grid
+-- bound to the hotkeys: cmd + alt + \
+hs.hotkey.bind({"cmd", "alt"}, "\\", function()
+  hs.grid.ui.highlightColor = {0.552, 0.643, 0.776, 0.4}
+  hs.grid.ui.highlightStrokeColor = {0.552, 0.643, 0.776, 0.8}
+  hs.grid.ui.textSize = 80
+  hs.grid.show()
+end)
+
 
 --auto reload the configuration file on save
 function reloadConfig(files)

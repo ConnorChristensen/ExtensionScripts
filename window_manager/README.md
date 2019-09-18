@@ -27,3 +27,4 @@ At the top of the **init.lua** file, there is a variable called `MARGIN`. It set
 `Command + alt + q` | top left quadrant
 `Command + alt + t` | top half
 `Command + alt + b` | bottom half
+`Command + alt + \` | open grid
