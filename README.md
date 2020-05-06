@@ -37,6 +37,7 @@ The folders are as such
 * dateStampChanger.sh: A bash script for changing the created time on a file
 * connor.h: Some helpful C++ functions
 * bash_profile: My bash profile that adds some cool shortcuts for terminal usage
+* zshrc: My zsh profile that adds some cool shortcuts for terminal usage
 
 ## Author
 Created by: Connor Christensen
