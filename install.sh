@@ -19,3 +19,6 @@ echo 'source ~/.zsh/default_zshrc' >> ~/.zshrc
 echo 'else' >> ~/.zshrc
 echo 'print "404: ~/.zsh/default_zshrc not found." fi' >> ~/.zshrc
 echo "export PATH='\$PATH:${PWD}/scripts'" >> ~/.zshrc
+
+# put the alert sound in the home directory so it can be used anywhere
+cp alert.wav ~/.alert.wav

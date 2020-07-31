@@ -28,6 +28,7 @@ alias sync="rsync -t --verbose --update --human-readable --progress --itemize-ch
 alias minify="perl -pi -e 's/\s+//g'"
 # short for perl-in-line
 alias pil="perl -pi -e"
+alias alert="afplay ~/.alert.wav"
 
 ## git aliases ##
 alias history="git-file-history"
