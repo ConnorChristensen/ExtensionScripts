@@ -51,3 +51,11 @@ The folders are as such
 * connor.h: Some helpful C++ functions
 * bash_profile: My bash profile that adds some cool shortcuts for terminal usage
 * zshrc: My zsh profile that adds some cool shortcuts for terminal usage
+
+
+## Projects
+
+Cool projects I would like to steal ideas from:
+
+* [andyshirt/MacOS-Dotfiles](https://github.com/atidyshirt/MacOS-Dotfiles)
+* [frewacom/Pywalfox](https://github.com/Frewacom/Pywalfox)
