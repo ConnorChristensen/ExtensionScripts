@@ -38,6 +38,3 @@ The folders are as such
 * connor.h: Some helpful C++ functions
 * bash_profile: My bash profile that adds some cool shortcuts for terminal usage
 * zshrc: My zsh profile that adds some cool shortcuts for terminal usage
-
-## Author
-Created by: Connor Christensen
