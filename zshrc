@@ -30,6 +30,10 @@ alias minify="perl -pi -e 's/\s+//g'"
 alias pil="perl -pi -e"
 alias alert="afplay ~/.alert.wav"
 
+# follow these up with '-i input.mp4 output.mp4' or whichever output codec you need
+alias vcompress="ffmpeg -vcodec libx265 -crf 28"
+alias video2gif='ffmpeg -filter_complex "[0:v] fps=12,scale=480:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse"'
+
 ## git aliases ##
 alias history="git-file-history"
 alias git-linechange="git log --stat --decorate --graph --oneline"
