@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# install homebrew
+if ! command -v brew &> /dev/null
+then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+# install all packages in the Brewfile
+brew bundle
+
 # zsh configuration
 mkdir ~/.zsh/
 touch ~/.zshrc
