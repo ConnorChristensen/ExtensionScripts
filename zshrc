@@ -29,6 +29,7 @@ alias minify="perl -pi -e 's/\s+//g'"
 # short for perl-in-line
 alias pil="perl -pi -e"
 alias alert="afplay ~/.alert.wav"
+alias mkdirnow="mkdir $(date '+%Y-%m-%d')"
 
 # follow these up with '-i input.mp4 output.mp4' or whichever output codec you need
 alias vcompress="ffmpeg -vcodec libx265 -crf 28"
