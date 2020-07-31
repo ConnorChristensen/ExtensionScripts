@@ -8,7 +8,14 @@ A demo of some of the code in action
 The desktop without the dock
 ![](images/desktop.png)
 
-## Interface
+## Getting set up
+
+### Installing
+
+Start out by running the install script, which will set up your zsh config.
+From the terminal run `./install.sh` in this directory.
+
+### Interface
 
 I did a few preference changes to the operating system to hide away most of the icons and buttons. This makes for a minimal setup that keeps away distracting information.
 
