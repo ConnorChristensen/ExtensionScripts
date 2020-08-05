@@ -3,11 +3,9 @@
 ![](hammerspoon-demo.gif)
 
 ## Installation
-1. Install [hammerspoon](https://github.com/Hammerspoon/hammerspoon/releases/tag/0.9.66)
-1. Open hammerspoon
-1. Click on the hammerspoon icon on the menu bar
-1. Click **Open Config** and paste the contents of **init.lua** into the opened file  
-1. Save the file and close it
+1. Install [hammerspoon](https://www.hammerspoon.org/) with `brew cask install hammerspoon`
+1. `rm ~/.hammerspoon/init.lua` - Remove the existing blank config
+1. `ln -s $(pwd)/init.lua ~/.hammerspoon/init.lua`
 
 ## Changing the margin
 At the top of the **init.lua** file, there is a variable called `MARGIN`. It sets how many pixels of empty space should be around the windows. I like mine around at around 5 or 10, but feel free to change it to whatever you like best.
@@ -28,3 +26,15 @@ At the top of the **init.lua** file, there is a variable called `MARGIN`. It set
 `Command + alt + t` | top half
 `Command + alt + b` | bottom half
 `Command + alt + \` | open grid
+`Command + alt + 1` | left most column
+`Command + alt + 2` | center left column
+`Command + alt + 3` | center right column
+`Command + alt + 4` | right most quadrant
+`Command + alt + j` | move window a column left
+`Command + alt + k` | move window a column down
+`Command + alt + l` | move window a column up
+`Command + alt + ;` | move window a column right
+`Command + alt + m` | make window a column thinner
+`Command + alt + ,` | make window a column taller
+`Command + alt + .` | make window a column shorter
+`Command + alt + /` | make window a column wider

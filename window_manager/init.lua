@@ -1,16 +1,37 @@
 -- This variable sets how many pixels of empty space should be around the windows
-MARGIN = 10
+MARGIN = 9
+-- The number of pixels between the top of the screen and the top of the grid
+TOPGAP = 50
+
+function getWindow()
+    return hs.window.focusedWindow()
+end
+
+function getGrid()
+    local win = getWindow()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    -- when using multiple monitors, some screens may start at non-zero x and y coordinates
+    -- in that case, the starting x and y values on the geometry to define the window need
+    -- to take into account the absolute x and y values of the top left corner of the screen.
+    -- max.x and max.y will be the distance in pixels from the top left corner of the primary
+    -- monitor.
+    local geo = hs.geometry.new(max.x, max.y + TOPGAP, max.w, max.h - TOPGAP)
+    local margin = hs.geometry(nil, nil, MARGIN, MARGIN)
+    return hs.grid.setGrid('4x4', screen, geo).setMargins(margin)
+end
 
 function getContext()
-    local win = hs.window.focusedWindow()
+    local win = getWindow()
     local f = win:frame()
     local screen = win:screen()
     local max = screen:frame()
-    return win, f, screen, max
+    return win, f, screen, max, getGrid()
 end
 
 function nextScreen()
-    local win = hs.window.focusedWindow()
+    local win = getWindow()
     local f = win:frame()
     local screen = win:screen():next()
     local max = screen:frame()
@@ -22,7 +43,7 @@ function nextScreen()
 end
 
 function previousScreen()
-    local win = hs.window.focusedWindow()
+    local win = getWindow()
     local f = win:frame()
     local screen = win:screen():previous()
     local max = screen:frame()
@@ -33,188 +54,95 @@ function previousScreen()
     win:setFrame(f)
 end
 
-function max_x(max)
-    return max.x + MARGIN
-end
+hs.hotkey.bind({"cmd", "alt"}, "j", function() getGrid().pushWindowLeft() end)
+hs.hotkey.bind({"cmd", "alt"}, "k", function() getGrid().pushWindowDown() end)
+hs.hotkey.bind({"cmd", "alt"}, "l", function() getGrid().pushWindowUp() end)
+hs.hotkey.bind({"cmd", "alt"}, ";", function() getGrid().pushWindowRight() end)
 
-function max_y(max)
-    return max.y + MARGIN
-end
-
-function max_h(max)
-    return max.h - (MARGIN * 2)
-end
-
-function max_w(max)
-    return max.w - (MARGIN * 2)
-end
-
-function half_w(max)
-    return (max_w(max) / 2) - MARGIN
-end
-
-function half_h(max)
-    return (max_h(max) / 2) - MARGIN
-end
+hs.hotkey.bind({"cmd", "alt"}, "m", function() getGrid().resizeWindowThinner() end)
+hs.hotkey.bind({"cmd", "alt"}, ",", function() getGrid().resizeWindowTaller() end)
+hs.hotkey.bind({"cmd", "alt"}, ".", function() getGrid().resizeWindowShorter() end)
+hs.hotkey.bind({"cmd", "alt"}, "/", function() getGrid().resizeWindowWider() end)
 
 --left half
 hs.hotkey.bind({"cmd"}, "1", function()
-    local win, f, screen, max = getContext()
-
-    if f.x == max_x(max) and f.y == max_y(max) and f.h == max_h(max) and f.w == half_w(max) then
-        nextScreen()
-        win, f, screen, max = getContext()
-    end
-
-    f.x = max_x(max)
-    f.y = max_y(max)
-    f.h = max_h(max)
-    f.w = half_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(0, 0, 2, 4))
 end)
 
 --right half
 hs.hotkey.bind({"cmd"}, "2", function()
-    local win, f, screen, max = getContext()
-
-    if f.x == max.x + (max.w / 2) and f.y == max_y(max) and f.h == max_h(max) and f.w == half_w(max) then
-        nextScreen()
-        win, f, screen, max = getContext()
-    end
-
-    f.x = max_x(max) + (max.w / 2)
-    f.y = max_y(max)
-    f.h = max_h(max)
-    f.w = half_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(2, 0, 2, 4))
 end)
 
 
 --full screen
 hs.hotkey.bind({"cmd"}, "3", function()
-    local win, f, screen, max = getContext()
-
-    if f.x == max_x(max) and f.y == max_y(max) and f.h == max_h(max) and f.w == max.w then
-        nextScreen()
-        win, f, screen, max = getContext()
-    end
-
-    f.x = max_x(max)
-    f.y = max_y(max)
-    f.h = max_h(max)
-    f.w = max_w(max)
-    win:setFrame(f)
-
+  -- defaults to the focused window
+  getGrid().maximizeWindow()
 end)
 
---left third
+--left-quarter
 hs.hotkey.bind({"cmd", "alt"}, "1", function()
-    local win, f, screen, max = getContext()
-    f.x = max_x(max)
-    f.y = max_y(max)
-    f.h = max_h(max)
-    f.w = max.w / 3
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(0, 0, 1, 4))
 end)
 
---middle third
+--middle-left-quarter
 hs.hotkey.bind({"cmd", "alt"}, "2", function()
-    local win, f, screen, max = getContext()
-    f.x = max_x(max) + (max.w / 3)
-    f.y = max_y(max)
-    f.h = max_h(max)
-    f.w = max.w / 3
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(1, 0, 1, 4))
 end)
 
---right third
+--middle-right-quarter
 hs.hotkey.bind({"cmd", "alt"}, "3", function()
-    local win, f, screen, max = getContext()
-    f.x = max.x + ((max.w / 3) * 2)
-    f.y = max_y(max)
-    f.h = max_h(max)
-    f.w = max.w / 3
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(2, 0, 1, 4))
 end)
 
+--right-quarter
+hs.hotkey.bind({"cmd", "alt"}, "4", function()
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(3, 0, 1, 4))
+end)
 
 --top left
 hs.hotkey.bind({"cmd", "alt"}, "Q", function()
-    local win, f, screen, max = getContext()
-
-    f.x = max_x(max)
-    f.y = max_y(max)
-    f.h = half_h(max)
-    f.w = half_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(0, 0, 2, 2))
 end)
 
 
 --bottom left
 hs.hotkey.bind({"cmd", "alt"}, "A", function()
-    local win, f, screen, max = getContext()
-
-    f.x = max_x(max)
-    f.y = max_y(max) + (max.h / 2)
-    f.h = half_h(max)
-    f.w = half_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(0, 2, 2, 2))
 end)
 
 --top right
 hs.hotkey.bind({"cmd", "alt"}, "W", function()
-    local win, f, screen, max = getContext()
-
-    f.x = max_x(max) + (max.w / 2)
-    f.y = max_y(max)
-    f.h = half_h(max)
-    f.w = half_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(2, 0, 2, 2))
 end)
 
 
 --bottom right
 hs.hotkey.bind({"cmd", "alt"}, "S", function()
-    local win, f, screen, max = getContext()
-
-    f.x = max_x(max) + (max.w / 2)
-    f.y = max_y(max) + (max.h / 2)
-    f.h = half_h(max)
-    f.w = half_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(2, 2, 2, 2))
 end)
 
 --bottom
 hs.hotkey.bind({"cmd", "alt"}, "B", function()
-    local win, f, screen, max = getContext()
-
-    f.x = max.x
-    f.y = max.y + (max.h / 2)
-    f.h = max.h / 2
-    f.w = max_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(0, 2, 4, 2))
 end)
 
 --top
 hs.hotkey.bind({"cmd", "alt"}, "T", function()
-    local win, f, screen, max = getContext()
-
-    f.x = max_x(max)
-    f.y = max_y(max)
-    f.h = max.h / 2
-    f.w = max_w(max)
-
-    win:setFrame(f)
+    local win, f, screen, max, grid = getContext()
+    grid.set(win, hs.geometry.new(0, 0, 4, 2))
 end)
 
 --next screen
@@ -230,10 +158,11 @@ end)
 -- grid
 -- bound to the hotkeys: cmd + alt + \
 hs.hotkey.bind({"cmd", "alt"}, "\\", function()
-  hs.grid.ui.highlightColor = {0.552, 0.643, 0.776, 0.4}
-  hs.grid.ui.highlightStrokeColor = {0.552, 0.643, 0.776, 0.8}
-  hs.grid.ui.textSize = 80
-  hs.grid.show()
+    local grid = getGrid()
+    grid.ui.highlightColor = {0.552, 0.643, 0.776, 0.4}
+    grid.ui.highlightStrokeColor = {0.552, 0.643, 0.776, 0.8}
+    grid.ui.textSize = 80
+    grid.show()
 end)
 
 
