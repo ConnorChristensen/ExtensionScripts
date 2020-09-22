@@ -1,0 +1,9 @@
+# This file is a global gitignore that will apply to all git projects
+# Use this for system and temporary files
+
+## Setup
+# 1. Drop this file at ~/.gitignore_global
+# 2. git config --global core.excludesfile '~/.gitignore_global'
+
+.DS_Store
+.vscode
