@@ -30,7 +30,6 @@ alias minify="perl -pi -e 's/\s+//g'"
 alias pil="perl -pi -e"
 alias alert="afplay ~/.alert.wav"
 alias mkdirnow="mkdir $(date '+%Y-%m-%d')"
-
 # follow these up with '-i input.mp4 output.mp4' or whichever output codec you need
 alias vcompress="ffmpeg -vcodec libx265 -crf 28"
 alias video2gif='ffmpeg -filter_complex "[0:v] fps=12,scale=480:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse"'
@@ -41,7 +40,7 @@ alias git-linechange="git log --stat --decorate --graph --oneline"
 alias grs="git rebase -i --autosquash"
 alias gr="git rebase -i"
 alias gf="git commit --fixup"
-alias gch="git checkout" 
+alias gch="git checkout"
 # will show only the commits that changed the file supplied as an argument
 alias git-follow="git log --follow -- "
 # hub is a git wrapper for easier github integration
@@ -69,11 +68,9 @@ export PATH="${PATH}:${HOME}/.local/bin/"
 # ( ) # Hide shell job control messages.
 (cat ~/.cache/wal/sequences | tr -d "\n" &)
 
-
-# better utilities
-# bat > cat
-# fd > find
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# helpful commands
+# sort in place: sort -o file file
