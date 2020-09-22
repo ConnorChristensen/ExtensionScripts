@@ -9,6 +9,13 @@ fi
 # install all packages in the Brewfile
 brew bundle
 
+brew cask install visual-studio-code
+brew cask install slack
+brew cask install insomnia
+brew cask install brackets
+brew cask install appcleaner
+brew cask install monitorcontrol
+
 # zsh configuration
 mkdir ~/.zsh/
 touch ~/.zshrc
