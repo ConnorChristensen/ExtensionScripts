@@ -21,3 +21,6 @@ brew 'mosh'
 
 # better than find
 brew 'fd'
+
+# the official github cli
+brew 'gh'
