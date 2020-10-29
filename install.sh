@@ -15,6 +15,7 @@ brew cask install insomnia
 brew cask install brackets
 brew cask install appcleaner
 brew cask install monitorcontrol
+brew cask install cakebrew
 
 # zsh configuration
 mkdir ~/.zsh/
