@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# install homebrew
+# install homebrew if not already installed
 if ! command -v brew &> /dev/null
 then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -9,19 +9,31 @@ fi
 # install all packages in the Brewfile
 brew bundle
 
-brew cask install visual-studio-code
-brew cask install slack
-brew cask install insomnia
-brew cask install brackets
-brew cask install appcleaner
-brew cask install monitorcontrol
-brew cask install cakebrew
+brew install --cask visual-studio-code
+brew install --cask insomnia
+brew install --cask monitorcontrol
 
-# zsh configuration
+######### Other applications you may want ########
+# brew install --cask slack
+# Little app for managing homebrew utils
+# brew install --cask cakebrew
+# Little app for uninstalling applications that are not installed through
+# a package manager
+# brew install --cask appcleaner
+
+####### zsh configuration ######
+# create a zsh folder
 mkdir ~/.zsh/
+# create a zshrc file if it does not already exist
 touch ~/.zshrc
+# create a symbolic file that forwards to the zshrc file in this project
 ln -s ${PWD}/zshrc ~/.zsh/default_zshrc
+
+# tell the user to read the readme
 echo "Please read the README to make full use of the zsh configuration"
+
+# code that will load in the default zshrc file or print an error if the
+# file can not be located
 echo 'if [ -f ~/.zsh/default_zshrc ]; then' >> ~/.zshrc
 echo 'source ~/.zsh/default_zshrc' >> ~/.zshrc
 echo 'else' >> ~/.zshrc

@@ -25,8 +25,8 @@ brew 'fd'
 # the official github cli
 brew 'gh'
 
-# an example oriented man pages
-brew 'tldr'
-
 # internet speed test from the command line
 brew 'speedtest-cli'
+
+# node version manager. Use this to install node.js
+brew `nvm`

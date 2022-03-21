@@ -1,22 +1,14 @@
 {
+  "telemetry.enableTelemetry": false,
+  "workbench.colorTheme": "Default Dark+",
+  "atomKeymap.promptV3Features": true,
   "editor.multiCursorModifier": "ctrlCmd",
-  "window.zoomLevel": 1,
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "editor.tokenColorCustomizations": {
-    "functions": "#CAA073",
-    "keywords": "#877F84",
-    "numbers": "#AE9B8E",
-    "strings": "#B9A697",
-    "types": "#C6B5A9",
-    "variables": "#D2C4BA",
-    "comments": "#ddd6d7"
   },
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "Default Light+",
   "workbench.preferredDarkColorTheme": "City Lights",
-  "workbench.colorTheme": "Default Light+",
   "editor.semanticTokenColorCustomizations": {
     "enabled": true
   },
@@ -32,17 +24,7 @@
     "/build/**/*": true
   },
   "editor.minimap.enabled": false,
-  "cSpell.userWords": [
-    "Pintrest",
-    "castiron",
-    "chdir",
-    "queequeg",
-    "stylelint",
-    "submenu",
-    "warewolf",
-    "youtube",
-    "zeitwerk"
-  ],
+  "cSpell.userWords": [],
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
@@ -71,10 +53,8 @@
   "editor.quickSuggestions": {
     "comments": true
   },
-  "workbench.iconTheme": "city-lights-icons-vsc-light",
   "editor.renderIndentGuides": false,
   "editor.tabSize": 2,
-  "terminal.integrated.shell.osx": "/bin/zsh",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -86,8 +66,8 @@
   "html.format.enable": false,
   "editor.formatOnSaveMode": "modifications",
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.scrollBeyondLastLine": false,
-  "settingsSync.ignoredSettings": [],
+  "settingsSync.ignoredSettings": []
 }

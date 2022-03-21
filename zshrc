@@ -8,7 +8,9 @@ export PS1="%1d > "
 setopt promptsubst
 export PS1=$'${(r:$COLUMNS::\u2500:)}'$PS1
 
-##### Personal Aliases #####
+#############################################################
+##################### Personal Aliases ######################
+#############################################################
 # the command `alias` will show all aliases in this profile incase you want a quick reference
 alias ll="ls -FGlAhp"
 alias mkdir="mkdir -pv"
@@ -17,60 +19,138 @@ alias f="open -a Finder ./"
 alias ..="cd ../"
 alias .2="cd ../.."
 alias .3="cd ../../../"
-alias gs="git status"
-alias graph="git log --graph --decorate --oneline"
+# Requires ncdu to be installed
+# built in terminal app for checking folder and file sizes
 alias scan="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+# Requires tldr to be installed
 alias help="tldr"
-alias youtubemp3="youtube-dl -x --audio-format mp3"
-alias cz="npm run commit"
-# pass a --dry-run to test before doing
+
+# usage: find-file "package.json" -print
+alias find-file="find . -path \"**/node_modules\" -prune -o -name"
+
+# pass --dry-run to test before doing
 alias sync="rsync -t --verbose --update --human-readable --progress --itemize-changes"
 alias minify="perl -pi -e 's/\s+//g'"
+
 # short for perl-in-line
 alias pil="perl -pi -e"
 alias alert="afplay ~/.alert.wav"
 alias mkdirnow="mkdir $(date '+%Y-%m-%d')"
-# follow these up with '-i input.mp4 output.mp4' or whichever output codec you need
-alias vcompress="ffmpeg -vcodec libx265 -crf 28"
-alias video2gif='ffmpeg -filter_complex "[0:v] fps=12,scale=480:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse"'
 
-## git aliases ##
-alias history="git-file-history"
-alias git-linechange="git log --stat --decorate --graph --oneline"
-alias grs="git rebase -i --autosquash"
-alias gr="git rebase -i"
-alias gf="git commit --fixup"
+# Requires ffmpeg to be installed
+# Usage: video2gif -i in.mov out.gif
+alias video2gif='ffmpeg -filter_complex "[0:v] fps=12,scale=700:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" -i input.mov output.gif'
+
+# Requires ffmpeg to be installed
+# Video compression only works in the current directory for files named input.mov
+# Usage: vcompress
+alias vcompress="ffmpeg -i input.mov -vcodec libx265 -crf 28 output.mp4"
+
+# -r: recursively
+# -n: each output line is preceded by its relative line number in the file
+alias packages-grep="grep -nr --exclude-dir=node_modules --include package.json"
+alias vue-grep="grep -nr --exclude-dir=node_modules --include \*.vue"
+
+# build the npm packages, pack it and open in finder so you can move the
+# resulting zip around your computer through the GUI
+alias pack="npm run build && npm pack && open -a Finder ./"
+
+# get a time stamp of the current time
+alias now="date +%Y-%m-%d-%H-%M-%S"
+
+# https://www.npmjs.com/package/gnomon
+# pipe a command through gnomon to see the run time
+alias gtime="gnomon --type=elapsed-total"
+
+# alert the user that a task has finished (get back to work)
+# Usage: npm install && gbtw
+alias gbtw="say 'get back to work'"
+
+# Usage: find-files "*.vue" -print
+alias find-files="find . -path ./node_modules -prune -o -name"
+
+## NPM commands ##
+# global packages to install
+# * npm-check-updates
+# * npm-packlist
+# * gnomon
+
+# npm repo - open project in browser
+# npm pack - create NPM module
+
+##### Helful scripts #####
+# `find . -path ./node_modules -prune -o -name "*.vue" -print | wc -l` - Get a count of all vue files
+# `find . -path ./node_modules -prune -o -name "*.stories.js" -print | xargs code` - Open all stories in a project
+# `lsof -P -i TCP -s TCP:LISTEN` - See all active ports
+# `npx depcheck` - See unused npm packages for a project
+# `npx webpack --profile --json > file.json` - Profile a page
+
+#############################################################
+######################## Git Aliases ########################
+#############################################################
+
 alias gch="git checkout"
+alias gs="git status"
+# add everything and commit it
+alias gac="git add . && git commit"
+## general purpose ##
+alias fetch="git fetch --prune"
+alias wip="git add . && git commit -m 'wip'"
+# `git checkout <commit> -- <file_path>` to reset one file to where it was at one point in history
+
+############## History Analysis and Discovery ###############
+
+# https://www.npmjs.com/package/git-file-history
+# needs to be installed globally first (eg. history)
+alias history="git-file-history"
+
+# get the name of the current branch
+alias branch-name="git rev-parse --abbrev-ref HEAD"
+
+# shows a history of linechanges (eg. git-linechange ./filename.txt)
+alias git-linechange="git log --stat --decorate --graph --oneline"
+
 # will show only the commits that changed the file supplied as an argument
+# (eg. git-follow ./filename.txt)
 alias git-follow="git log --follow -- "
-# hub is a git wrapper for easier github integration
-# https://github.com/github/hub
-alias issues="hub issue --assignee connorchristensen"
-alias ci="hub ci-status -v"
 
-## docker ##
-alias portainer="docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer && echo 'portainer running at localhost:9000 (username: admin, password: portainer)'"
-alias swagger-editor="docker run -d -p 8081:8080 swaggerapi/swagger-editor && echo 'swagger editor running at localhost:8081'"
-alias dex="docker exec -it"
+# see a pretty graph of branches in your terminal (eg. graph)
+alias graph="git log --graph --decorate --oneline --all"
 
-##### Path changes ######
-# link to /usr/local/bin
-export PATH="/usr/local/bin:$PATH"
+## rebasing tools ##
+# short for "Git Rebase autoSquash"
+# rebase using the best options including an interactive session and
+# autosquash of fixup commits (eg. grs master)
+alias grs="git rebase --interactive --autosquash"
 
-# link to the sbin path for some possible homebrew files
+# commit your changes to be easily merged in with a certain commit
+# if you need to fixup the most recent commit, just use `git commit --amend` :)
+# (eg. gf <git-sha>)
+alias gf="git commit --fixup"
+
+# Use --reset-author flag during rebase to reset all commits to be authored by
+# you and reset time stamp to the time in which the rebase occured
+
+#################### Branch Management ######################
+
+# disconnect your branch from origin
+alias git-unset="git branch --unset-upstream"
+
+###################### Github Tools #########################
+
+# Requires installation of github CLI (gh)
+# https://cli.github.com/
+alias pr="gh pr view --web"
+
+#############################################################
+########################### Other ###########################
+#############################################################
+
+## Homebrew
 export PATH="/usr/local/sbin:$PATH"
 
-# Add local 'pip' to PATH:
-export PATH="${PATH}:${HOME}/.local/bin/"
-
+# This is part of the pywal installation
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences | tr -d "\n" &)
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# helpful commands
-# sort in place: sort -o file file
+# (cat ~/.cache/wal/sequences | tr -d "\n" &)
