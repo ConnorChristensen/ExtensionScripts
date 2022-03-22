@@ -54,6 +54,11 @@ if ! grep "load_file" ~/.zshrc &>/dev/null; then
   cat command_line/zsh/append_zshrc.sh >> ~/.zshrc
 fi
 
+# add symlinks to the scripts in the scripts folder to /usr/local/bin so they
+# are accessible at the sytem level
+ln -si command_line/scripts/git-backup-then-rebase-squash.sh /usr/local/bin/gbrs
+ln -si command_line/scripts/git-backup.sh /usr/local/bin/gb
+
 # put the alert sound in the home directory so it can be used anywhere
 cp alert.wav ~/.alert.wav
 
