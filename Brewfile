@@ -1,3 +1,6 @@
+# List of packages that will be installed with `brew bundle`
+# https://thoughtbot.com/blog/brewfile-a-gemfile-but-for-homebrew
+
 # parse json with the command line
 brew 'jq'
 

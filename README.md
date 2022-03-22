@@ -1,3 +1,5 @@
+# Extension Scripts
+
 ## Demo
 
 A demo of some of the code in action
@@ -52,13 +54,14 @@ This project contains several standalone things that you can install selectively
 The folders are as such
 
 * UI: Adds the clock and battery icons, and changes the background image and color scheme
-	* dark-light: The code that controls the environment dark/light color schemes
-	* ubersicht: The files that load the clock and battery on the desktop using the app [ubersicht](http://tracesof.net/uebersicht/)
+  * dark-light: The code that controls the environment dark/light color schemes
+  * ubersicht: The files that load the clock and battery on the desktop using the app [ubersicht](http://tracesof.net/uebersicht/)
+
 * window_manager: the configuration files for [hammerspoon](http://www.hammerspoon.org/) that allow for window placement through keyboard shortcuts
 * dateStampChanger.sh: A bash script for changing the created time on a file
 * connor.h: Some helpful C++ functions
-* bash_profile: My bash profile that adds some cool shortcuts for terminal usage
-* zshrc: My zsh profile that adds some cool shortcuts for terminal usage. macOS defaults to zsh, so this is the most up to date one.
+* command_line: Configuration that adds some cool shortcuts for terminal usage. macOS defaults to zsh, so if you don't know which to use, it is probably zsh.
+* install.sh: A script that installs the command line tools along with helpful software.
 
 ## Projects
 

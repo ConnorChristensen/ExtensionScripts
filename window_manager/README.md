@@ -1,13 +1,16 @@
 # Window Manager
+
 ## Demo
+
 ![](hammerspoon-demo.gif)
 
 ## Installation
-1. Install [hammerspoon](https://www.hammerspoon.org/) with `brew cask install hammerspoon`
-1. `rm ~/.hammerspoon/init.lua` - Remove the existing blank config
-1. `ln -s $(pwd)/init.lua ~/.hammerspoon/init.lua`
+
+1. Install [hammerspoon](https://www.hammerspoon.org/) with `brew install hammerspoon --cask`
+1. `ln -sf init.lua ~/.hammerspoon/init.lua`
 
 ## Changing the margin
+
 At the top of the **init.lua** file, there is a variable called `MARGIN`. It sets how many pixels of empty space should be around the windows. I like mine around at around 5 or 10, but feel free to change it to whatever you like best.
 
 ## Actions

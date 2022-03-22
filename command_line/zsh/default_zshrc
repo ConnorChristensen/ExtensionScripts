@@ -93,7 +93,6 @@ alias gch="git checkout"
 alias gs="git status"
 # add everything and commit it
 alias gac="git add . && git commit"
-## general purpose ##
 alias fetch="git fetch --prune"
 alias wip="git add . && git commit -m 'wip'"
 # `git checkout <commit> -- <file_path>` to reset one file to where it was at one point in history
@@ -153,4 +152,4 @@ export PATH="/usr/local/sbin:$PATH"
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-# (cat ~/.cache/wal/sequences | tr -d "\n" &)
+(cat ~/.cache/wal/sequences | tr -d "\n" &)
