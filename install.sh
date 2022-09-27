@@ -13,9 +13,14 @@ fi
 echo ">> Installing homebrew utilites"
 brew bundle
 
+installed_packages=$(brew list)
+
 # install these packages if they are not already installed
 cask_install() {
-  brew list $1 &>/dev/null || brew install --cask $1
+  # if package not installed
+  if ! [[ "$installed_packages" =~ "$1" ]]; then
+    brew install --cask $1
+  fi
 }
 
 echo ">> Installing applications via homebrew"
@@ -56,8 +61,8 @@ fi
 
 # add symlinks to the scripts in the scripts folder to /usr/local/bin so they
 # are accessible at the sytem level
-ln -si command_line/scripts/git-backup-then-rebase-squash.sh /usr/local/bin/gbrs
-ln -si command_line/scripts/git-backup.sh /usr/local/bin/gb
+ln -si ${PWD}/command_line/scripts/git-backup-then-rebase-squash.sh /usr/local/bin/gbrs
+ln -si ${PWD}/command_line/scripts/git-backup.sh /usr/local/bin/gb
 
 # put the alert sound in the home directory so it can be used anywhere
 cp alert.wav ~/.alert.wav

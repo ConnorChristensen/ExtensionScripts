@@ -19,9 +19,11 @@ alias f="open -a Finder ./"
 alias ..="cd ../"
 alias .2="cd ../.."
 alias .3="cd ../../../"
+
 # Requires ncdu to be installed
 # built in terminal app for checking folder and file sizes
 alias scan="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
 # Requires tldr to be installed
 alias help="tldr"
 
@@ -69,10 +71,13 @@ alias gbtw="say 'get back to work'"
 # Usage: find-files "*.vue" -print
 alias find-files="find . -path ./node_modules -prune -o -name"
 
+# Switch to the right version of node and install packages
+alias install="nvm use && npm install"
+
 ## NPM commands ##
 # global packages to install
 # * npm-check-updates
-# * npm-packlist
+# * npm-packlist -> then use `npx npm-packlist`
 # * gnomon
 
 # npm repo - open project in browser
@@ -91,10 +96,27 @@ alias find-files="find . -path ./node_modules -prune -o -name"
 
 alias gch="git checkout"
 alias gs="git status"
+
 # add everything and commit it
 alias gac="git add . && git commit"
+
+# fetch all branches on origin and also delete any local branches that are no
+# longer on origin
 alias fetch="git fetch --prune"
-alias wip="git add . && git commit -m 'wip'"
+
+# add eveything and save it as a "work in progress" commit
+alias wip="git add . && git commit -m 'work in progress'"
+
+# copy the url of the source repository
+alias copy-remote="git remote get-url origin | pbcopy"
+
+# pull the master branch while on a different branch
+alias pull-master="git fetch origin master:master"
+
+# pull the main branch while on a different branch
+alias pull-main="git fetch origin main:main"
+
+##### Helful scripts #####
 # `git checkout <commit> -- <file_path>` to reset one file to where it was at one point in history
 
 ############## History Analysis and Discovery ###############
@@ -116,6 +138,9 @@ alias git-follow="git log --follow -- "
 # see a pretty graph of branches in your terminal (eg. graph)
 alias graph="git log --graph --decorate --oneline --all"
 
+# See the files changed between now and a branch (usually master)
+# git diff --name-only <branch>
+
 ## rebasing tools ##
 # short for "Git Rebase autoSquash"
 # rebase using the best options including an interactive session and
@@ -127,6 +152,9 @@ alias grs="git rebase --interactive --autosquash"
 # (eg. gf <git-sha>)
 alias gf="git commit --fixup"
 
+# Quick amend the last commit. Add some code in without changing the commit message
+alias amend="git commit --amend --no-edit"
+
 # Use --reset-author flag during rebase to reset all commits to be authored by
 # you and reset time stamp to the time in which the rebase occured
 
@@ -134,6 +162,12 @@ alias gf="git commit --fixup"
 
 # disconnect your branch from origin
 alias git-unset="git branch --unset-upstream"
+
+# push the current branch to origin when the branch does not yet exist on origin
+# Short for git-push-set-upstream
+# get the branch name and then use xargs to take the previous output and add
+# that as the argument to git push
+alias gpsu="git branch --show-current | xargs git push --set-upstream origin"
 
 ###################### Github Tools #########################
 

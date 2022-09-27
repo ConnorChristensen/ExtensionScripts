@@ -46,6 +46,7 @@ In the **Dock** tab of the System Preferences, I checked the box near the bottom
 * [changelog](https://www.npmjs.com/package/changelog)
 * [git-file-history](https://www.npmjs.com/package/git-file-history)
 * [tldr](https://www.npmjs.com/package/tldr)
+* [npm-packlist](https://www.npmjs.com/package/npm-packlist)
 
 ## Structure
 
