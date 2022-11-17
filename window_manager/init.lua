@@ -3,12 +3,12 @@ MARGIN = 9
 -- The number of pixels between the top of the screen and the top of the grid
 TOPGAP = 50
 
-function getWindow()
+function getActiveWindow()
     return hs.window.focusedWindow()
 end
 
 function getGrid()
-    local win = getWindow()
+    local win = getActiveWindow()
     local screen = win:screen()
     local max = screen:frame()
 
@@ -23,35 +23,19 @@ function getGrid()
 end
 
 function getContext()
-    local win = getWindow()
+    local win = getActiveWindow()
     local f = win:frame()
     local screen = win:screen()
     local max = screen:frame()
     return win, f, screen, max, getGrid()
 end
 
-function nextScreen()
-    local win = getWindow()
-    local f = win:frame()
-    local screen = win:screen():next()
-    local max = screen:frame()
-
-    f.x = max.x
-    f.y = max.y
-
-    win:setFrame(f)
+function moveWindowOneScreenRight()
+    getActiveWindow():moveOneScreenEast(false, false, 0.4)
 end
 
-function previousScreen()
-    local win = getWindow()
-    local f = win:frame()
-    local screen = win:screen():previous()
-    local max = screen:frame()
-
-    f.x = max.x
-    f.y = max.y
-
-    win:setFrame(f)
+function moveWindowOneScreenLeft()
+    getActiveWindow():moveOneScreenWest(false, false, 0.4)
 end
 
 hs.hotkey.bind({"cmd", "alt"}, "j", function() getGrid().pushWindowLeft() end)
@@ -145,14 +129,14 @@ hs.hotkey.bind({"cmd", "alt"}, "T", function()
     grid.set(win, hs.geometry.new(0, 0, 4, 2))
 end)
 
---next screen
+-- move window to the screen on the right
 hs.hotkey.bind({"cmd"}, "0", function()
-    nextScreen()
+    moveWindowOneScreenRight()
 end)
 
---previous screen
+-- move window to the screen on the left
 hs.hotkey.bind({"cmd"}, "9", function()
-    previousScreen()
+    moveWindowOneScreenLeft()
 end)
 
 -- grid
