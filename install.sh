@@ -74,6 +74,7 @@ cp ./UI/ubersicht/clock.coffee ${HOME}/Library/Application\ Support/Übersicht/
 # add symlinks to the scripts to /usr/local/bin so they are accessible at the sytem level
 ln -si ${PWD}/command_line/scripts/git-backup-then-rebase-squash.sh /usr/local/bin/gbrs
 ln -si ${PWD}/command_line/scripts/git-backup.sh /usr/local/bin/gb
+ln -si ${PWD}/command_line/scripts/journal.sh /usr/local/bin/journal
 ln -si ${PWD}/UI/dark-light/ui.sh /usr/local/bin/ui
 
 # create hammerpsoon folder if it does not already exist
