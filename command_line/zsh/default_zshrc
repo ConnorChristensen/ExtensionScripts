@@ -53,12 +53,11 @@ alias vcompress="ffmpeg -i input.mov -vcodec libx265 -crf 28 output.mp4"
 alias packages-grep="grep -nr --exclude-dir=node_modules --include package.json"
 alias vue-grep="grep -nr --exclude-dir=node_modules --include \*.vue"
 
-# build the npm packages, pack it and open in finder so you can move the
-# resulting zip around your computer through the GUI
-alias pack="npm run build && npm pack && open -a Finder ./"
-
 # get a time stamp of the current time
 alias now="date +%Y-%m-%d-%H-%M-%S"
+alias year="date +%Y"
+alias month="date +%m"
+alias day="date +%d"
 
 # https://www.npmjs.com/package/gnomon
 # pipe a command through gnomon to see the run time
@@ -71,8 +70,23 @@ alias gbtw="say 'get back to work'"
 # Usage: find-files "*.vue" -print
 alias find-files="find . -path ./node_modules -prune -o -name"
 
+#############################################################
+##################### Node/NPM Aliases ######################
+#############################################################
+
 # Switch to the right version of node and install packages
 alias install="nvm use && npm install"
+
+# build the npm packages, pack it and open in finder so you can move the
+# resulting zip around your computer through the GUI
+alias pack="npm run build && npm pack && open -a Finder ./"
+
+alias list-npm-local-links="npm ls -g --depth=0 --link=true"
+alias count-npm-packages="npm ls --parseable | wc -l"
+
+# build the package and create a local link of the package to be tested in other
+# packages or projects. Make sure both projects are using the same version of node.
+alias link-local="npm run build && npm link"
 
 ## NPM commands ##
 # global packages to install
@@ -96,6 +110,7 @@ alias install="nvm use && npm install"
 
 alias gch="git checkout"
 alias gs="git status"
+alias grc="git rebase --continue"
 
 # add everything and commit it
 alias gac="git add . && git commit"
@@ -105,7 +120,7 @@ alias gac="git add . && git commit"
 alias fetch="git fetch --prune"
 
 # add eveything and save it as a "work in progress" commit
-alias wip="git add . && git commit -m 'work in progress'"
+alias wip="git add . && git commit -m 'chore: work in progress'"
 
 # copy the url of the source repository
 alias copy-remote="git remote get-url origin | pbcopy"
@@ -116,8 +131,14 @@ alias pull-master="git fetch origin master:master"
 # pull the main branch while on a different branch
 alias pull-main="git fetch origin main:main"
 
+# open the associated PR for the branch you are currently on in GitHub
+alias ghpr="gh pr view -w"
+
 ##### Helful scripts #####
 # `git checkout <commit> -- <file_path>` to reset one file to where it was at one point in history
+# `git remote set-url origin <remote_url>` to update the remote for a project
+# `git commit --author "ESLint <EMAIL>" -m "style: lint project"`
+# `git branch -va`: See branches on origin
 
 ############## History Analysis and Discovery ###############
 
@@ -183,6 +204,9 @@ alias pr="gh pr view --web"
 export PATH="/usr/local/sbin:$PATH"
 
 # This is part of the pywal installation
+
+# add python library to the path
+export PATH="${PATH}:${HOME}/Library/Python/3.9/bin"
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
