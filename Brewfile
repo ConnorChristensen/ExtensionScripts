@@ -32,4 +32,7 @@ brew 'gh'
 brew 'speedtest-cli'
 
 # node version manager. Use this to install node.js
-brew `nvm`
+brew 'nvm'
+
+# dependency for pywal
+brew 'imagemagick'
