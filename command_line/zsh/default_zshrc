@@ -134,6 +134,17 @@ alias pull-main="git fetch origin main:main"
 # open the associated PR for the branch you are currently on in GitHub
 alias ghpr="gh pr view -w"
 
+# All pull requests on GitHub that are open and you are requested to be a reviewer,
+# excluding pull requests that are dependencies (add --web to open in browser)
+alias gh-review-requested="gh search prs --state=open --review-requested=@me -- -label:dependencies"
+
+# All pull requests on GitHub that are open and assigned to you
+# (add --web to open in browser)
+alias gh-my-prs="gh search prs --state=open --assignee=@me"
+
+# All closed pull requests assigned to you (add --web to open in browser)
+alias gh-my-closed-prs="gh search prs --assignee=@me --merged"
+
 ##### Helful scripts #####
 # `git checkout <commit> -- <file_path>` to reset one file to where it was at one point in history
 # `git remote set-url origin <remote_url>` to update the remote for a project
