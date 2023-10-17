@@ -89,7 +89,7 @@ alias count-npm-packages="npm ls --parseable | wc -l"
 alias link-local="npm run build && npm link"
 
 ## NPM commands ##
-# global packages to install
+# global npm packages to install
 # * npm-check-updates
 # * npm-packlist -> then use `npx npm-packlist`
 # * gnomon
@@ -170,8 +170,6 @@ alias git-follow="git log --follow -- "
 # see a pretty graph of branches in your terminal (eg. graph)
 alias graph="git log --graph --decorate --oneline --all"
 
-# See the files changed between now and a branch (usually master)
-# git diff --name-only <branch>
 
 ## rebasing tools ##
 # short for "Git Rebase autoSquash"
@@ -189,6 +187,12 @@ alias amend="git commit --amend --no-edit"
 
 # Use --reset-author flag during rebase to reset all commits to be authored by
 # you and reset time stamp to the time in which the rebase occured
+
+# See the files changed between now and a branch (usually master)
+# git diff --name-only <branch>
+
+# Use delta instead of git diff
+# https://dandavison.github.io/delta/introduction.html
 
 #################### Branch Management ######################
 

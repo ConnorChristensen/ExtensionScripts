@@ -36,3 +36,6 @@ brew 'nvm'
 
 # dependency for pywal
 brew 'imagemagick'
+
+# A better git diff tool (eg. delta file1 file2)
+brew 'git-delta'
