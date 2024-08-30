@@ -25,6 +25,9 @@ brew 'mosh'
 # better than find
 brew 'fd'
 
+# render markdown in terminal
+brew 'glow'
+
 # the official github cli
 brew 'gh'
 
