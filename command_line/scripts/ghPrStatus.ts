@@ -10,8 +10,6 @@ import {
 	getMyReviewRequestedPrs,
 	printMyPr,
 	printMyReviewRequestedPrs,
-	printRows,
-	printTableHeader,
 	validFormats,
 } from "./shared";
 
@@ -47,8 +45,8 @@ const inReviewPrs = await getInReviewPrs();
 printMyPr({
 	prs: inReviewPrs,
 	format: values.format,
-	categoryLabel: "In Review"
-})
+	categoryLabel: "In Review",
+});
 
 console.log("");
 
@@ -56,36 +54,38 @@ const inProgressPrs = await getInProgressPrs();
 printMyPr({
 	prs: inProgressPrs,
 	format: values.format,
-	categoryLabel: "In Progress"
-})
+	categoryLabel: "In Progress",
+});
 
 console.log("");
 
-const myReviewRequestedPrs = await getMyReviewRequestedPrs({ requiredLabel: 'frontend'});
-printMyReviewRequestedPrs(myReviewRequestedPrs, values.format)
+const myReviewRequestedPrs = await getMyReviewRequestedPrs({
+	requiredLabel: "frontend",
+});
+printMyReviewRequestedPrs(myReviewRequestedPrs, values.format);
 
 // When using the journal format, links to the pull requests and projects
 // can be added all at the end instead of inline, which makes the tables
 // much more concise and readable while still containing links.
 if (values.format === "journal") {
 	console.log("");
-	printRows(
-		myReviewRequestedPrs,
-		(pr) => `[PR#${pr.data.number}]: ${pr.data.url}`,
-	);
-	printRows(inProgressPrs, (pr) => `[PR#${pr.data.number}]: ${pr.data.url}`);
-	printRows(inReviewPrs, (pr) => `[PR#${pr.data.number}]: ${pr.data.url}`);
 
 	let allPrs: PR[] = [];
 	allPrs = allPrs.concat(inReviewPrs);
 	allPrs = allPrs.concat(inProgressPrs);
 	allPrs = allPrs.concat(myReviewRequestedPrs);
 
-	const repos = {};
+	// sets will automatically prevent duplicate entries
+	const links: Set<string> = new Set()
 	for (const pr of allPrs) {
-		repos[pr.data.repository.name] = pr.repoUrl;
+		links.add(`[${pr.data.repository.name}]: ${pr.repoUrl}`);
+		links.add(`[PR#${pr.data.number}]: ${pr.data.url}`);
+		if (pr.issueName) {
+			links.add(`[${pr.issueName}]: ${pr.issueUrl}`);
+		}
 	}
-	for (const [repoName, repoUrl] of Object.entries(repos)) {
-		console.log(`[${repoName}]: ${repoUrl}`);
+
+	for (const link of Array.from(links).toSorted()) {
+		console.log(link)
 	}
 }

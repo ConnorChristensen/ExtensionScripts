@@ -4,13 +4,13 @@ export interface PullRequestAuthor {
 	login: string;
 	type: "User" | "Bot";
 	url: string;
-	labels: string[];
+	labels?: string[];
 }
 
 export interface PullRequestRepository {
 	name: string;
 	nameWithOwner: string;
-	url: string;
+	url?: string;
 }
 
 export interface PullRequestLabel {
@@ -29,7 +29,7 @@ export interface PullRequestAssignee {
 }
 
 export interface PullRequestType {
-	assignees: PullRequestAssignee[];
+	assignees?: PullRequestAssignee[];
 	author: PullRequestAuthor;
 	body: string;
 	isDraft: boolean;

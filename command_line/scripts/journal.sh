@@ -16,6 +16,9 @@ if [ ! -f "$TODAYS_JOURNAL" ]; then
   cp $JOURNAL_PATH/template.md $JOURNAL_PATH/$DAY.md
 
   echo "Journal for today was created by copying the template."
+
+  echo "" >> $JOURNAL_PATH/$DAY.md
+  bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format journal >> $JOURNAL_PATH/$DAY.md
 fi
 
 # open it in VScode

@@ -51,12 +51,19 @@ export class PR {
 	get isBot() {
 		return this.data.author.type === "Bot";
 	}
-	get issue() {
+	get issueName() {
 		const issue = this.data.body.match(
-			/\[#.*?\]\(https:\/\/jira.funda.nl.*?\)/,
+			/\[(#.*?)\]\(https:\/\/jira.funda.nl.*?\)/,
 		);
-		if (issue?.length) {
-			return issue[0];
+		if (issue?.length && issue.length > 0) {
+			return issue[1];
+		}
+		return "";
+	}
+	get issueUrl() {
+		const issue = this.data.body.match(/\((https:\/\/jira.funda.nl.*?)\)/);
+		if (issue?.length && issue.length > 0) {
+			return issue[1];
 		}
 		return "";
 	}
@@ -166,11 +173,12 @@ export function printMyPr({ prs, format, categoryLabel }: PrintMyPrProps) {
 				"Project",
 				"Description",
 			]);
-			printRows(
-				prs,
-				(pr) =>
-					`| ${pr.issue} | [PR#${pr.data.number}] | [${pr.data.repository.name}] | ${pr.data.title} |`,
-			);
+			printRows(prs, (pr) => {
+				if (pr.issueName) {
+					return `| [${pr.issueName}] | [PR#${pr.data.number}] | [${pr.data.repository.name}] | ${pr.data.title} |`;
+				}
+				return `| | [PR#${pr.data.number}] | [${pr.data.repository.name}] | ${pr.data.title} |`;
+			});
 			break;
 	}
 }
