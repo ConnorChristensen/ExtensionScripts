@@ -4,6 +4,9 @@
 # parse json with the command line
 brew 'jq'
 
+# navigate JSON with command line
+brew 'fx'
+
 # view folders and files in a tree structure
 brew 'tree'
 
