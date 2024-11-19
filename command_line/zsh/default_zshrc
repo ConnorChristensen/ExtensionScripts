@@ -46,7 +46,9 @@ alias video2gif='ffmpeg -filter_complex "[0:v] fps=12,scale=700:-1,split [a][b];
 # Requires ffmpeg to be installed
 # Video compression only works in the current directory for files named input.mov
 # Usage: vcompress
-alias vcompress="ffmpeg -i input.mov -vcodec libx265 -crf 28 output.mp4"
+# Other options to add to ffmpeg:
+# * Reduce size with -s (eg. -s 1280x720)
+alias vcompress="ffmpeg -i input.mov -fs 100M output.mp4"
 
 # -r: recursively
 # -n: each output line is preceded by its relative line number in the file
@@ -89,11 +91,13 @@ alias count-npm-packages="npm ls --parseable | wc -l"
 alias link-local="npm run build && npm link"
 
 ## NPM commands ##
-# global npm packages to install
+# Global npm packages to install
 # * npm-check-updates
 # * npm-packlist -> then use `npx npm-packlist`
-# * gnomon
+# * gnomon - Runtime profiler
+# * dependency-tree - Visualize connections between JS/TS/CSS files -> `npx dependency-tree --directory=path/to/files filename`
 
+# Helpful built-in npm commands
 # npm repo - open project in browser
 # npm pack - create NPM module
 
@@ -111,6 +115,11 @@ alias link-local="npm run build && npm link"
 alias gch="git checkout"
 alias gs="git status"
 alias grc="git rebase --continue"
+alias gchpi="git cherry-pick"
+alias stashall="git stash --include-untracked"
+
+# checkout the head branch (master/main/etc)
+# alias gchh="git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 
 # add everything and commit it
 alias gac="git add . && git commit"
@@ -130,20 +139,6 @@ alias pull-master="git fetch origin master:master"
 
 # pull the main branch while on a different branch
 alias pull-main="git fetch origin main:main"
-
-# open the associated PR for the branch you are currently on in GitHub
-alias ghpr="gh pr view -w"
-
-# All pull requests on GitHub that are open and you are requested to be a reviewer,
-# excluding pull requests that are dependencies (add --web to open in browser)
-alias gh-review-requested="gh search prs --state=open --review-requested=@me -- -label:dependencies"
-
-# All pull requests on GitHub that are open and assigned to you
-# (add --web to open in browser)
-alias gh-my-prs="gh search prs --state=open --assignee=@me"
-
-# All closed pull requests assigned to you (add --web to open in browser)
-alias gh-my-closed-prs="gh search prs --assignee=@me --merged"
 
 ##### Helful scripts #####
 # `git checkout <commit> -- <file_path>` to reset one file to where it was at one point in history
@@ -169,7 +164,6 @@ alias git-follow="git log --follow -- "
 
 # see a pretty graph of branches in your terminal (eg. graph)
 alias graph="git log --graph --decorate --oneline --all"
-
 
 ## rebasing tools ##
 # short for "Git Rebase autoSquash"
@@ -209,7 +203,24 @@ alias gpsu="git branch --show-current | xargs git push --set-upstream origin"
 
 # Requires installation of github CLI (gh)
 # https://cli.github.com/
-alias pr="gh pr view --web"
+
+# open the associated PR for the branch you are currently on in GitHub
+alias ghpr="gh pr view --web"
+
+# All pull requests on GitHub that are open and you are requested to be a reviewer,
+# excluding pull requests that are dependencies (add --web to open in browser)
+
+# All pull requests on GitHub that are open and assigned to you
+# (add --web to open in browser)
+alias gh-my-prs="gh search prs --state=open --assignee=@me"
+
+# All closed pull requests assigned to you (add --web to open in browser)
+alias gh-my-closed-prs="gh search prs --assignee=@me --merged"
+
+alias gh-status-journal="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format journal"
+alias gh-status-terminal="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format terminal | glow"
+alias gh-reviewed="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrReviewed.ts"
+alias gh-review-requested="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrMyReviewRequested.ts --format terminal | glow"
 
 #############################################################
 ########################### Other ###########################
