@@ -1,49 +1,6 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
-  {
-    "key": "ctrl+cmd+right",
-    "command": "-workbench.action.terminal.resizePaneRight",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "key": "ctrl+cmd+up",
-    "command": "-editor.action.moveLinesUpAction",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+cmd+down",
-    "command": "-editor.action.moveLinesDownAction",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+cmd+left",
-    "command": "-workbench.action.terminal.resizePaneLeft",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "key": "ctrl+cmd+right",
-    "command": "-workbench.action.moveEditorToNextGroup"
-  },
-  {
-    "key": "cmd+k shift+cmd+right",
-    "command": "-workbench.action.moveEditorRightInGroup"
-  },
-  {
-    "key": "ctrl+cmd+left",
-    "command": "-workbench.action.moveEditorToPreviousGroup"
-  },
-  {
-    "key": "cmd+k shift+cmd+left",
-    "command": "-workbench.action.moveEditorLeftInGroup"
-  },
-  {
-    "key": "cmd+k left",
-    "command": "-workbench.action.moveActiveEditorGroupLeft"
-  },
-  {
-    "key": "cmd+k right",
-    "command": "-workbench.action.moveActiveEditorGroupRight"
-  },
+  // move tabs around inside a window
   {
     "key": "cmd+k cmd+j",
     "command": "workbench.action.moveEditorToLeftGroup"
@@ -60,12 +17,62 @@
     "key": "cmd+k cmd+m",
     "command": "workbench.action.moveEditorToBelowGroup"
   },
+
+  // run ruleset
   {
-    "key": "cmd+k down",
-    "command": "-workbench.action.moveActiveEditorGroupDown"
+    "key": "ctrl+shift+/",
+    "command": "replacerules.runRuleset",
+    "when": "editorTextFocus && !editorReadonly",
+    "args": {
+      "rulesetName": "Generate PR and ticket links"
+    }
+  },
+
+  // remove default formatting command
+  {
+    "key": "cmd+k cmd+f",
+    "command": "-editor.action.formatSelection",
+    "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
+  },
+  // replace formatting command with a "search project for token" command
+  {
+    "key": "cmd+k cmd+f",
+    "command": "workbench.action.quickTextSearch"
+  },
+
+  // remove default cmd \ actions
+  {
+    "key": "cmd+\\",
+    "command": "-workbench.action.terminal.splitActiveTab",
+    "when": "terminalProcessSupported && terminalTabsFocus"
   },
   {
-    "key": "cmd+k up",
-    "command": "-workbench.action.moveActiveEditorGroupUp"
+    "key": "cmd+\\",
+    "command": "-workbench.action.splitEditor"
+  },
+
+  // use cmd \ to toggle sidebar visibility
+  {
+    "key": "cmd+\\",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+
+  // remove default sidebar visibility toggle
+  {
+    "key": "cmd+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+
+  // remove default debug command
+  {
+    "key": "shift+cmd+d",
+    "command": "-workbench.view.debug",
+    "when": "viewContainer.workbench.view.debug.enabled"
+  },
+
+  // replace with duplicate line
+  {
+    "key": "shift+cmd+d",
+    "command": "editor.action.duplicateSelection"
   }
 ]

@@ -1,36 +1,26 @@
 {
-  "telemetry.enableTelemetry": false,
-  "workbench.colorTheme": "Default Dark+",
-  "atomKeymap.promptV3Features": true,
+  "telemetry.telemetryLevel": "off",
+  "workbench.colorTheme": "Default Light+",
   "editor.multiCursorModifier": "ctrlCmd",
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "Default Light+",
-  "workbench.preferredDarkColorTheme": "City Lights",
+  "workbench.preferredDarkColorTheme": "Material Theme",
   "editor.semanticTokenColorCustomizations": {
     "enabled": true
   },
-  "search.exclude": {
-    "www/**/*": true
-  },
   "explorer.confirmDelete": false,
-  "files.autoSave": "onWindowChange",
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDragAndDrop": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "files.exclude": {
     "/build/**/*": true
   },
   "editor.minimap.enabled": false,
-  "cSpell.userWords": [],
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "editor.smoothScrolling": true,
   "workbench.list.smoothScrolling": true,
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "cSpell.enableFiletypes": [
     "!cpp",
     "!csharp",
@@ -42,32 +32,111 @@
     "!pug",
     "!rust",
     "!scala",
-    "!typescript",
     "!typescriptreact"
   ],
   "emmet.triggerExpansionOnTab": true,
-  "editor.formatOnPaste": true,
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+  },
+  "editor.formatOnPaste": false,
   "search.useGlobalIgnoreFiles": true,
   "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
   "http.proxyAuthorization": null,
   "editor.quickSuggestions": {
-    "comments": true
+    "comments": true,
+    "strings": true
   },
-  "editor.renderIndentGuides": false,
   "editor.tabSize": 2,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "editor.cursorBlinking": "phase",
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "html.format.preserveNewLines": false,
   "html.format.enable": false,
-  "editor.formatOnSaveMode": "modifications",
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "editor.scrollBeyondLastLine": false,
-  "settingsSync.ignoredSettings": []
+  "settingsSync.ignoredSettings": [],
+  "editor.guides.indentation": false,
+  "markdown.extension.toc.updateOnSave": false,
+  "cSpell.languageSettings": [],
+  "markdown.extension.orderedList.autoRenumber": false,
+  "git.openRepositoryInParentFolders": "never",
+  "i18n-ally.displayLanguage": "en",
+  "markdown.extension.orderedList.marker": "one",
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.fontLigatures": false,
+  "replacerules.rules": {
+    "Generate pull request links": {
+      "find": "^(https:\/\/github.com\/.*\/pull\/([0-9]+))$",
+      "replace": "[PR#$2]: $1"
+    },
+    "Generate ticket links": {
+      "find": "^(https:\/\/fre365.atlassian.net\/.*?\/(.*))$",
+      "replace": "[#$2]: $1"
+    }
+  },
+  "replacerules.rulesets": {
+    "Generate PR and ticket links": {
+      "rules": [
+        "Generate pull request links",
+        "Generate ticket links"
+      ],
+    }
+  },
+  "window.zoomLevel": 1,
+  "[git-commit]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "files.autoSave": "onWindowChange",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "i18n-ally.dirStructure": "auto",
+
+  //
+  // Linting rules
+  //
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "eslint.validate": [
+    "typescript",
+    "vue",
+    "javascript"
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.formatOnSave": false
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "editor.copyWithSyntaxHighlighting": false,
+  "gitlens.advanced.messages": {
+    "suppressIntegrationRequestTimedOutWarning": true
+  },
+  "eslint.useFlatConfig": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "npm.packageManager": "npm",
+
+  //
+  // Vue hints
+  //
+  "vue.autoInsert.dotValue": true,
+  "vue.inlayHints.destructuredProps": true,
+  "vue.inlayHints.inlineHandlerLeading": true,
+  "vue.inlayHints.missingProps": true,
+  "vue.inlayHints.optionsWrapper": true,
+  "vue.inlayHints.vBindShorthand": true,
+  "vue.server.hybridMode": "typeScriptPluginOnly"
 }
