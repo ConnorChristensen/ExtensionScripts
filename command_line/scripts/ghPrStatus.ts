@@ -2,16 +2,14 @@
  * Show all pull requests that are in review, in progress and review requested
  */
 import { parseArgs } from "node:util";
+import { type Format, validFormats } from "./shared";
 import {
-	type Format,
-	type PR,
-	getInProgressPrs,
 	getInReviewPrs,
+	getInProgressPrs,
 	getMyReviewRequestedPrs,
-	printMyPr,
-	printMyReviewRequestedPrs,
-	validFormats,
-} from "./shared";
+} from "./shared/prGetters";
+import { printMyPr, printMyReviewRequestedPrs } from "./shared/printers";
+import type { PR } from "./shared/pr";
 
 interface Args {
 	format: Format;
@@ -76,16 +74,16 @@ if (values.format === "journal") {
 	allPrs = allPrs.concat(myReviewRequestedPrs);
 
 	// sets will automatically prevent duplicate entries
-	const links: Set<string> = new Set()
+	const links: Set<string> = new Set();
 	for (const pr of allPrs) {
-		links.add(`[${pr.data.repository.name}]: ${pr.repoUrl}`);
-		links.add(`[PR#${pr.data.number}]: ${pr.data.url}`);
+		links.add(`[${pr.repoName}]: ${pr.repoUrl}`);
+		links.add(`[PR#${pr.number}]: ${pr.url}`);
 		if (pr.issueName) {
 			links.add(`[${pr.issueName}]: ${pr.issueUrl}`);
 		}
 	}
 
 	for (const link of Array.from(links).toSorted()) {
-		console.log(link)
+		console.log(link);
 	}
 }

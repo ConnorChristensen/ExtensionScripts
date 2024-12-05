@@ -1,5 +1,7 @@
 import { parseArgs } from "node:util";
-import { type Format, getMyReviewRequestedPrs, printMyReviewRequestedPrs, validFormats } from "./shared";
+import { type Format, validFormats } from "./shared";
+import { getMyReviewRequestedPrs } from "./shared/prGetters";
+import { printMyReviewRequestedPrs } from "./shared/printers";
 
 interface Args {
 	format: Format;
@@ -11,9 +13,6 @@ const { values } = parseArgs({
 	options: {
 		format: {
 			type: "string",
-		},
-		debug: {
-			type: "boolean",
 		},
 	},
 	strict: true,
@@ -29,5 +28,5 @@ if (!argumentsAreValid(values)) {
 	process.exit();
 }
 
-const prs = await getMyReviewRequestedPrs({ requiredLabel: 'frontend' });
-printMyReviewRequestedPrs(prs, values.format)
+const prs = await getMyReviewRequestedPrs({ requiredLabel: "frontend" });
+printMyReviewRequestedPrs(prs, values.format);

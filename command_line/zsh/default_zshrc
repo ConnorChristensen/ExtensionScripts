@@ -214,17 +214,18 @@ alias ghpr="gh pr view --web"
 # (add --web to open in browser)
 alias gh-my-prs="gh search prs --state=open --assignee=@me"
 
-# All closed pull requests assigned to you (add --web to open in browser)
-alias gh-my-closed-prs="gh search prs --assignee=@me --merged"
+alias gh-status="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format journal"
+alias gh-tasks="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrTasks.ts"
 
-alias gh-status-journal="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format journal"
-alias gh-status-terminal="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format terminal | glow"
-alias gh-reviewed="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrReviewed.ts"
-alias gh-review-requested="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrMyReviewRequested.ts --format terminal | glow"
+# Format for terminal
+alias gh-my-review-requested="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrMyReviewRequested.ts --format terminal | glow -w 200"
+alias gh-status-terminal="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format terminal | glow -w 200"
 
 #############################################################
 ########################### Other ###########################
 #############################################################
+
+alias transcribe="source ~/whisper-env-3.10/bin/activate && whisper --model base --language en --task transcribe --output_format txt"
 
 ## Homebrew
 export PATH="/usr/local/sbin:$PATH"

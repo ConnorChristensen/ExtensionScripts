@@ -1,4 +1,4 @@
-import type { PullRequestType } from "../ghTypes";
+import type { PullRequestType } from "../shared/ghTypes";
 
 export const prDataMock: PullRequestType = {
 	author: {
@@ -25,4 +25,5 @@ export const prDataMock: PullRequestType = {
 	},
 	title: "Add external documentation for interactivity",
 	url: "https://github.com/domain/repositoryName/pull/143",
+	closedAt: "2024-10-10T02:20:30Z",
 };

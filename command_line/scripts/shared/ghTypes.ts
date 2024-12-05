@@ -32,6 +32,7 @@ export interface PullRequestType {
 	assignees?: PullRequestAssignee[];
 	author: PullRequestAuthor;
 	body: string;
+	closedAt: string;
 	isDraft: boolean;
 	labels: PullRequestLabel[];
 	number: number;
