@@ -14,10 +14,32 @@ const { values } = parseArgs({
 		date: {
 			type: "string",
 		},
+		help: {
+			type: 'boolean',
+			short: 'h'
+		}
 	},
 	strict: true,
 	allowPositionals: true,
 });
+
+if (values.help) {
+	console.log(`
+Show tasks for a particular month. If no date is supplied, the response
+defaults to the current month.
+
+Usage:
+	bun ./ghPrTasks.ts
+	gh-tasks
+	gh-tasks --date 2024-10
+	gh-tasks -h | --help
+
+Options:
+	-h --help     Show this screen.
+	--date        View tasks from a particular month.
+	`)
+	process.exit(0)
+}
 
 //////// fetch and print pull requests ////////
 const markdownLinkFormat: MarkdownLinkFormat = "inline";

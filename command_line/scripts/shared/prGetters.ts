@@ -13,6 +13,10 @@ const prFields = [
 	"url",
 ] as const;
 
+function sortPrsByDateAscending(prs: PR[]) {
+	return prs.toSorted((prA, prB) => new Date(prA.closedAtDate).getTime() - new Date(prB.closedAtDate).getTime());
+}
+
 /** Get all pull requests that are in review (not a draft) */
 export async function getInReviewPrs() {
 	const flags = [
@@ -32,13 +36,13 @@ export async function getMergedPrs(date?: string) {
 	const flags = [
 		"--assignee=@me",
 		`--json ${prFields.join(",")}`,
-		`--updated "${updatedDate}"`,
+		`--merged-at "${updatedDate}"`,
 		"--merged",
 	].join(" ");
 
 	const input = await $`gh search prs ${{ raw: flags }}"`.text();
 	const prs: PR[] = JSON.parse(input).map((pr) => new PR(pr));
-	return prs;
+	return sortPrsByDateAscending(prs)
 }
 
 /** Get all pull requests that are in progress (draft status) */
@@ -88,5 +92,5 @@ export async function getReviewedPrs(date?: string) {
 
 	const input = await $`gh search prs ${{ raw: flags }}"`.text();
 	const prs: PR[] = JSON.parse(input).map((pr) => new PR(pr));
-	return prs;
+	return sortPrsByDateAscending(prs);
 }
