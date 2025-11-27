@@ -1,0 +1,23 @@
+#!/bin/bash
+
+current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+if [ 'master' = ${current_branch} ]
+then
+  echo "> ERROR: Cannot push to master. Switch to a different branch and create a pull request."
+  exit 1 # push will not execute
+else
+  echo "> Running pre-push scripts"
+  echo "> Pass --no-verify to skip the scripts"
+  npm --prefix ./src/Fundadesk run pre-push
+  REUSULT=$?
+
+  echo $RESULT
+  if [ "$RESULT" != "0" ]; then
+    echo "> Pre-push script failed"
+    exit 1
+  fi
+
+  echo "> Pre-push script successful"
+  exit 0 # push will execute
+fi
