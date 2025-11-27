@@ -9,7 +9,7 @@ setopt promptsubst
 export PS1=$'${(r:$COLUMNS::\u2500:)}'$PS1
 
 #############################################################
-##################### Personal Aliases ######################
+##################### General Aliases ######################
 #############################################################
 # the command `alias` will show all aliases in this profile incase you want a quick reference
 alias ll="ls -FGlAhp"
@@ -19,6 +19,8 @@ alias f="open -a Finder ./"
 alias ..="cd ../"
 alias .2="cd ../.."
 alias .3="cd ../../../"
+
+alias trim="sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'" # trim leading and trailing whitespace
 
 # Requires ncdu to be installed
 # built in terminal app for checking folder and file sizes
@@ -32,10 +34,13 @@ alias find-file="find . -path \"**/node_modules\" -prune -o -name"
 
 # pass --dry-run to test before doing
 alias sync="rsync -t --verbose --update --human-readable --progress --itemize-changes"
+
+# remove all whitespace
 alias minify="perl -pi -e 's/\s+//g'"
 
 # short for perl-in-line
 alias pil="perl -pi -e"
+
 alias alert="afplay ~/.alert.wav"
 alias mkdirnow="mkdir $(date '+%Y-%m-%d')"
 
@@ -90,6 +95,10 @@ alias count-npm-packages="npm ls --parseable | wc -l"
 # packages or projects. Make sure both projects are using the same version of node.
 alias link-local="npm run build && npm link"
 
+alias lock-resolve="git add package-lock.json && git reset package-lock.json && git checkout package-lock.json && npm install && git add package-lock.json"
+
+alias npmUpgrade="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/upgradeNpmPackage.ts"
+
 ## NPM commands ##
 # Global npm packages to install
 # * npm-check-updates
@@ -107,6 +116,7 @@ alias link-local="npm run build && npm link"
 # `lsof -P -i TCP -s TCP:LISTEN` - See all active ports
 # `npx depcheck` - See unused npm packages for a project
 # `npx webpack --profile --json > file.json` - Profile a page
+# `npx todoctor` - Get an overview of TODO items in a Git repo
 
 #############################################################
 ######################## Git Aliases ########################
@@ -128,7 +138,7 @@ alias gac="git add . && git commit"
 # longer on origin
 alias fetch="git fetch --prune"
 
-# add eveything and save it as a "work in progress" commit
+# add everything and save it as a "work in progress" commit
 alias wip="git add . && git commit -m 'chore: work in progress'"
 
 # copy the url of the source repository
@@ -140,11 +150,36 @@ alias pull-master="git fetch origin master:master"
 # pull the main branch while on a different branch
 alias pull-main="git fetch origin main:main"
 
-##### Helful scripts #####
+# commit and inform the reader that the commit was AI generated
+# alias ai-commit='git commit --author "copilot [COMPANY_TEAM_EMAIL]'
+
+## rebasing tools ##
+# short for "Git Rebase autoSquash"
+# rebase using the best options including an interactive session and
+# autosquash of fixup commits (eg. grs master)
+alias grs="git rebase --interactive --autosquash"
+
+# commit your changes to be easily merged in with a certain commit
+# if you need to fixup the most recent commit, just use `git commit --amend` :)
+# (eg. gf <git-sha>)
+alias gf="git commit --fixup"
+
+# Quick amend the last commit. Add some code in without changing the commit message
+alias amend="git commit --amend --no-edit"
+
+# Use --reset-author flag during rebase to reset all commits to be authored by
+# you and reset time stamp to the time in which the rebase occurred
+
+# rebase a branch, execute an npm script in a sub folder per commit, commit all changes.
+# good for updating snapshot tests (or making sure all tests pass per commit)
+# git rebase [SHA/BRANCH] --exec 'npm --prefix "$(git rev-parse --show-toplevel)/[FOLDER_PATH]" run [NPM SCRIPT] && git add . && git commit --amend --no-edit'
+
+##### Helpful scripts #####
 # `git checkout <commit> -- <file_path>` to reset one file to where it was at one point in history
 # `git remote set-url origin <remote_url>` to update the remote for a project
 # `git commit --author "ESLint <EMAIL>" -m "style: lint project"`
 # `git branch -va`: See branches on origin
+# CLI for semantic commits: <https://github.com/stefanlogue/meteor>
 
 ############## History Analysis and Discovery ###############
 
@@ -164,23 +199,6 @@ alias git-follow="git log --follow -- "
 
 # see a pretty graph of branches in your terminal (eg. graph)
 alias graph="git log --graph --decorate --oneline --all"
-
-## rebasing tools ##
-# short for "Git Rebase autoSquash"
-# rebase using the best options including an interactive session and
-# autosquash of fixup commits (eg. grs master)
-alias grs="git rebase --interactive --autosquash"
-
-# commit your changes to be easily merged in with a certain commit
-# if you need to fixup the most recent commit, just use `git commit --amend` :)
-# (eg. gf <git-sha>)
-alias gf="git commit --fixup"
-
-# Quick amend the last commit. Add some code in without changing the commit message
-alias amend="git commit --amend --no-edit"
-
-# Use --reset-author flag during rebase to reset all commits to be authored by
-# you and reset time stamp to the time in which the rebase occured
 
 # See the files changed between now and a branch (usually master)
 # git diff --name-only <branch>
@@ -214,18 +232,30 @@ alias ghpr="gh pr view --web"
 # (add --web to open in browser)
 alias gh-my-prs="gh search prs --state=open --assignee=@me"
 
+#############################################################
+#################### Journal Management #####################
+#############################################################
+
 alias gh-status="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format journal"
+
+# See reviewed an merged pull requests for a given month
+# pass --date YYYY-MM to see tasks in the past
 alias gh-tasks="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrTasks.ts"
 
 # Format for terminal
 alias gh-my-review-requested="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrMyReviewRequested.ts --format terminal | glow -w 200"
 alias gh-status-terminal="bun /Users/connor/work/configs/ExtensionScripts/command_line/scripts/ghPrStatus.ts --format terminal | glow -w 200"
 
+# Find all journals that work from office. Then capture the date (via the file name)
+alias office-days="grep -r 'Work from: Office' . | sed -rn 's/.\/([0-9]+).*/1. \1/p'"
+
+# Find all tasks that were completed in the current month
+# Find all check marks (✅) in a folder, capture everything in the second column, remove all "|", prepend "* "
+alias completed-tasks="grep -r "✅" . | sed -n 's/^[^|]*\|[^|]*\|\([^|]*\).*/\1/p' | sed 's/|//g' | sed 's/^/* /'"
+
 #############################################################
 ########################### Other ###########################
 #############################################################
-
-alias transcribe="source ~/whisper-env-3.10/bin/activate && whisper --model base --language en --task transcribe --output_format txt"
 
 ## Homebrew
 export PATH="/usr/local/sbin:$PATH"
